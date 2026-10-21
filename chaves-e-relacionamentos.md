@@ -1,6 +1,6 @@
 # Chaves e Relacionamentos entre Tabelas
 
-## Chave primária — por que usar ID?
+ Chave primária — por que usar ID?
 Para identificar um registro precisamos de uma coluna **única**. Nome, e-mail e data de nascimento **podem repetir** (dois "João Silva", dois e-mails iguais por erro). A solução é criar um **código/ID**:
 
 | codigo (PK) | nome | email | nascimento |
@@ -17,7 +17,7 @@ CREATE TABLE cliente (
 );
 ```
 
-## Como relacionar duas tabelas? Chave estrangeira
+ Como relacionar duas tabelas? Chave estrangeira
 Como saber quais pedidos são do cliente João? Colocando **`cliente_id` na tabela `pedido`**. Essa coluna "não faz parte" do pedido, mas indica **a quem pertence**. É chamada **chave estrangeira (FK)** porque o dado vem de **outra tabela**.
 
 ```
@@ -29,12 +29,12 @@ cliente                      pedido
                             └────┴────────────┴────────────┘
 ```
 
-### ❌ O erro clássico
+O erro clássico
 Colocar `pedido_id` dentro de `cliente`: para cada novo pedido teríamos que **repetir todos os dados do cliente** (redundância, inconsistência). A FK deve ficar **no lado "muitos"**.
 
-> **Regra de ouro:** a FK fica na tabela do lado **N** (muitos).
+ **Regra de ouro:** a FK fica na tabela do lado **N** (muitos).
 
-## Relacionamento Muitos-para-Um (Many to One)
+ Relacionamento Muitos-para-Um (Many to One)
 Olhando de `pedido` para `cliente`: **muitos pedidos** apontam para **um** cliente. Visto de `cliente`: **um cliente** tem **muitos pedidos** (**1:N**).
 
 ```sql
@@ -53,9 +53,9 @@ CREATE TABLE pedido (
 );
 ```
 
-## Tipos de relacionamento
+ Tipos de relacionamento
 
-### 1:1 (um para um)
+ 1:1 (um para um)
 Ex.: `pessoa` ↔ `passaporte`. FK com `UNIQUE` (ou PK compartilhada).
 ```sql
 CREATE TABLE pessoa (id INT PRIMARY KEY, nome VARCHAR(100));
@@ -67,10 +67,10 @@ CREATE TABLE passaporte (
 );
 ```
 
-### 1:N (um para muitos) — o mais comum
+1:N (um para muitos) — o mais comum
 Ex.: `departamento` → `empregado`. FK no lado N.
 
-### N:N (muitos para muitos)
+ N:N (muitos para muitos)
 Ex.: `aluno` ↔ `disciplina` (um aluno cursa várias disciplinas; uma disciplina tem vários alunos). Precisa de uma **tabela associativa** com duas FKs (que geralmente formam a PK composta):
 ```sql
 CREATE TABLE aluno      (id INT PRIMARY KEY, nome VARCHAR(100));
@@ -86,7 +86,7 @@ CREATE TABLE matricula (
 );
 ```
 
-## Ações referenciais: ON DELETE / ON UPDATE
+ Ações referenciais: ON DELETE / ON UPDATE
 O que acontece com os filhos quando o pai é apagado/alterado?
 
 | Opção | Efeito |
@@ -108,7 +108,7 @@ CREATE TABLE pedido (
 Exemplo de uso: `item_pedido` com `ON DELETE CASCADE` (apagou o pedido, somem os itens).
 Cuidado: `CASCADE` em cliente→pedido pode apagar histórico financeiro sem querer.
 
-## Exemplo do slide: Departamento × Empregado
+ Exemplo do slide:
 ```sql
 CREATE TABLE departamento (
     num_dept  INT PRIMARY KEY,
@@ -127,9 +127,9 @@ CREATE TABLE empregado (
 
 ---
 
-## 💻 Código completo para testar
 
-### relacionamentos.sql
+
+ relacionamentos.sql
 
 ```sql
 CREATE DATABASE IF NOT EXISTS empresa CHARACTER SET utf8mb4;
