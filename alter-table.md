@@ -2,38 +2,38 @@
 
 `ALTER TABLE` muda a **estrutura** da tabela (não os dados).
 
-## Adicionar coluna
+ Adicionar coluna
 ```sql
 ALTER TABLE tb_clientes ADD estado_civil VARCHAR(20);
 ALTER TABLE tb_clientes ADD email VARCHAR(100) AFTER nome;     -- posição
 ALTER TABLE tb_clientes ADD cadastro DATE FIRST;               -- primeira coluna
 ```
 
-## Modificar tipo/tamanho da coluna
+ Modificar tipo/tamanho da coluna
 ```sql
 ALTER TABLE tb_clientes MODIFY nome VARCHAR(150);
 ALTER TABLE tb_clientes MODIFY nome VARCHAR(150) NOT NULL;     -- e adiciona NOT NULL
 ```
-> No MySQL você **precisa repetir o tipo** mesmo para só adicionar `NOT NULL` (no Oracle bastava `MODIFY codigo NOT NULL`).
+ No MySQL você **precisa repetir o tipo** mesmo para só adicionar `NOT NULL`.
 
-## Renomear coluna
+ Renomear coluna
 ```sql
 ALTER TABLE tb_clientes RENAME COLUMN estado_civil TO est_civ;       -- MySQL 8+
 ALTER TABLE tb_clientes CHANGE estado_civil est_civ VARCHAR(20);     -- qualquer versão
 ```
 
-## Renomear tabela
+Renomear tabela
 ```sql
 ALTER TABLE tb_clientes RENAME TO clientes;
 RENAME TABLE clientes TO tb_clientes;   -- forma alternativa
 ```
 
-## Excluir coluna
+ Excluir coluna
 ```sql
 ALTER TABLE tb_clientes DROP COLUMN est_civ;
 ```
 
-## Chave primária por ALTER
+ Chave primária por ALTER
 ```sql
 -- Adicionar PK
 ALTER TABLE tb_clientes ADD PRIMARY KEY (cpf);
@@ -44,10 +44,9 @@ ALTER TABLE tb_clientes ADD codigo INT AUTO_INCREMENT PRIMARY KEY FIRST;
 -- Remover PK (no MySQL só existe uma, então não precisa do nome)
 ALTER TABLE tb_clientes DROP PRIMARY KEY;
 ```
-> No Oracle (slides) a PK tem um nome gerado (`SYS_C0037279139`) e é preciso `DROP CONSTRAINT nome`. No MySQL é `DROP PRIMARY KEY`.
-> Se a coluna for AUTO_INCREMENT, remova o AUTO_INCREMENT antes (`MODIFY`) de dropar a PK.
 
-## Outras alterações de constraints
+
+ Outras alterações de constraints
 ```sql
 ALTER TABLE pedido ADD CONSTRAINT fk_pedido_cliente
     FOREIGN KEY (cliente_id) REFERENCES cliente(id);
@@ -62,7 +61,7 @@ ALTER TABLE cliente ALTER COLUMN status DROP DEFAULT;
 
 ---
 
-## 💻 Código completo para testar
+## Código completo para testar
 
 ### alter.sql
 
