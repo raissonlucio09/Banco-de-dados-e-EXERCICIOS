@@ -3,7 +3,7 @@
 Os dados ficam **separados** em tabelas (normalização). O `JOIN` **junta** as linhas relacionadas numa única consulta, normalmente combinando **PK = FK**.
 
 
-## INNER JOIN
+ INNER JOIN
 Só traz linhas que **têm correspondência nas duas tabelas**.
 ```sql
 SELECT c.nome, p.id AS pedido, p.valor_total
@@ -12,7 +12,7 @@ INNER JOIN pedido p ON p.cliente_id = c.id;
 ```
 Clientes **sem pedido** não aparecem.
 
-## LEFT JOIN
+ LEFT JOIN
 Todas as linhas da tabela **da esquerda** + correspondentes da direita (NULL quando não há).
 ```sql
 SELECT c.nome, p.id AS pedido
@@ -27,7 +27,7 @@ LEFT JOIN pedido p ON p.cliente_id = c.id
 WHERE p.id IS NULL;
 ```
 
-## RIGHT JOIN
+ RIGHT JOIN
 Inverso do LEFT: todas da **direita**.
 ```sql
 SELECT c.nome, p.id
@@ -36,7 +36,7 @@ RIGHT JOIN pedido p ON p.cliente_id = c.id;
 ```
 (Na prática, use LEFT trocando a ordem das tabelas.)
 
-## FULL OUTER JOIN
+ FULL OUTER JOIN
 O MySQL **não tem** `FULL JOIN`; simula-se com `UNION`:
 ```sql
 SELECT c.nome, p.id FROM cliente c LEFT JOIN pedido p ON p.cliente_id = c.id
@@ -44,13 +44,13 @@ UNION
 SELECT c.nome, p.id FROM cliente c RIGHT JOIN pedido p ON p.cliente_id = c.id;
 ```
 
-## CROSS JOIN
+ CROSS JOIN
 Produto cartesiano: **toda combinação** (N × M linhas).
 ```sql
 SELECT c.nome, pr.nome FROM cliente c CROSS JOIN produto pr;
 ```
 
-## SELF JOIN
+ SELF JOIN
 A tabela se junta **com ela mesma** (ex.: funcionário e seu gerente).
 ```sql
 SELECT f.nome AS funcionario, g.nome AS gerente
@@ -58,7 +58,7 @@ FROM funcionario f
 LEFT JOIN funcionario g ON g.id = f.gerente_id;
 ```
 
-## Vários JOINs
+ Vários JOINs
 ```sql
 SELECT c.nome, p.id, pr.nome AS produto, ip.quantidade
 FROM cliente c
@@ -67,7 +67,7 @@ JOIN item_pedido ip ON ip.pedido_id = p.id
 JOIN produto pr     ON pr.id = ip.produto_id;
 ```
 
-## Resumo visual
+ Resumo visual
 ```
 INNER:  A ∩ B
 LEFT:   A inteira + (A ∩ B)
@@ -76,7 +76,7 @@ FULL:   A ∪ B
 CROSS:  A × B
 ```
 
-## Dicas
+ Dicas
 - Use **aliases** (`c`, `p`) para escrever menos.
 - Sempre escreva a condição `ON`; sem ela vira produto cartesiano.
 - Colunas com mesmo nome em ambas as tabelas precisam do prefixo: `c.id`, `p.id`.
@@ -84,16 +84,14 @@ CROSS:  A × B
 
 ---
 
-## 💻 Código completo para testar
 
-### joins.sql
+
+ joins.sql
 
 ```sql
-CREATE DATABASE IF NOT EXISTS loja_joins CHARACTER SET utf8mb4;
+CREATE DATABASE loja_joins;
 USE loja_joins;
 
-DROP TABLE IF EXISTS item_pedido; DROP TABLE IF EXISTS pedido;
-DROP TABLE IF EXISTS produto; DROP TABLE IF EXISTS cliente; DROP TABLE IF EXISTS funcionario;
 
 CREATE TABLE cliente (id INT PRIMARY KEY AUTO_INCREMENT, nome VARCHAR(50) NOT NULL);
 CREATE TABLE produto (id INT PRIMARY KEY AUTO_INCREMENT, nome VARCHAR(50) NOT NULL, preco DECIMAL(10,2));
