@@ -2,9 +2,9 @@
 
 Rotinas guardadas **dentro do banco**.
 
-> Em clientes de linha de comando, troque o delimitador (`DELIMITER //`) para o `;` interno não encerrar o bloco.
+Em clientes de linha de comando, troque o delimitador (`DELIMITER //`) para o `;` interno não encerrar o bloco.
 
-## Stored Procedure
+ Stored Procedure
 Bloco reutilizável executado com `CALL`.
 ```sql
 DELIMITER //
@@ -29,7 +29,7 @@ CALL sp_total_clientes(@qtd);
 SELECT @qtd;
 ```
 
-## Function
+ Function
 Retorna **um valor** e pode ser usada dentro do SELECT.
 ```sql
 DELIMITER //
@@ -50,11 +50,11 @@ WHILE i < 5 DO ... SET i = i + 1; END WHILE;
 DECLARE v INT DEFAULT 0;
 ```
 
-## Trigger (gatilho)
+ Trigger (gatilho)
 Executa **automaticamente** antes/depois de `INSERT`, `UPDATE` ou `DELETE`.
 `NEW` = linha nova; `OLD` = linha antiga.
 
-### Auditoria: registrar alterações
+ Auditoria: registrar alterações
 ```sql
 CREATE TABLE log_preco (
     id INT AUTO_INCREMENT PRIMARY KEY,
@@ -75,7 +75,7 @@ END //
 DELIMITER ;
 ```
 
-### Validação: BEFORE INSERT
+Validação: BEFORE INSERT
 ```sql
 DELIMITER //
 CREATE TRIGGER trg_valida_idade
@@ -89,7 +89,7 @@ END //
 DELIMITER ;
 ```
 
-## Gerenciar
+ Gerenciar
 ```sql
 SHOW PROCEDURE STATUS WHERE Db = 'estudos';
 SHOW TRIGGERS;
@@ -98,20 +98,20 @@ DROP FUNCTION IF EXISTS fn_idade;
 DROP TRIGGER IF EXISTS trg_produto_preco;
 ```
 
-## Cuidados
+ Cuidados
 Triggers "escondem" lógica e dificultam debug; use com moderação. Regras de negócio complexas geralmente ficam na aplicação, deixando o banco para integridade e auditoria.
 
 ---
 
-## 💻 Código completo para testar
 
-### rotinas.sql
+
+ rotinas.sql
 
 ```sql
-CREATE DATABASE IF NOT EXISTS rotinas_demo CHARACTER SET utf8mb4;
+CREATE DATABASE rotinas_demo;
 USE rotinas_demo;
 
-DROP TABLE IF EXISTS log_preco; DROP TABLE IF EXISTS produto;
+
 CREATE TABLE produto (id INT PRIMARY KEY AUTO_INCREMENT, nome VARCHAR(50), preco DECIMAL(10,2), nascimento DATE);
 CREATE TABLE log_preco (
     id INT AUTO_INCREMENT PRIMARY KEY, produto_id INT,
@@ -120,27 +120,26 @@ CREATE TABLE log_preco (
 );
 INSERT INTO produto (nome, preco) VALUES ('Mouse', 50), ('Teclado', 120);
 
-DROP PROCEDURE IF EXISTS sp_produtos_acima;
-DROP FUNCTION IF EXISTS fn_idade;
-DROP TRIGGER IF EXISTS trg_produto_preco;
 
 DELIMITER //
 CREATE PROCEDURE sp_produtos_acima(IN p_preco DECIMAL(10,2))
 BEGIN
     SELECT * FROM produto WHERE preco > p_preco;
-END //
+
+
 
 CREATE FUNCTION fn_idade(p_nasc DATE) RETURNS INT DETERMINISTIC
 BEGIN
     RETURN TIMESTAMPDIFF(YEAR, p_nasc, CURDATE());
-END //
+
 
 CREATE TRIGGER trg_produto_preco AFTER UPDATE ON produto FOR EACH ROW
 BEGIN
     IF OLD.preco <> NEW.preco THEN
         INSERT INTO log_preco (produto_id, preco_antigo, preco_novo) VALUES (OLD.id, OLD.preco, NEW.preco);
     END IF;
-END //
+
+
 DELIMITER ;
 
 CALL sp_produtos_acima(60);
