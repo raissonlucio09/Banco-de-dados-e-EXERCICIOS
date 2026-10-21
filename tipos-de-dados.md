@@ -2,7 +2,7 @@
 
 Tipos de dados **classificam** as informações de cada coluna. Escolher o tipo certo deixa o banco **mais eficiente** e **mais seguro**.
 
-## Texto
+ Texto
 | Tipo | Descrição | Exemplo |
 |---|---|---|
 | `CHAR(n)` | Tamanho **fixo** (até 255). Completa com espaços. | `CHAR(2)` para UF, `CHAR(11)` para CPF |
@@ -10,11 +10,11 @@ Tipos de dados **classificam** as informações de cada coluna. Escolher o tipo 
 | `TEXT` | Textos longos | descrição, observações |
 | `ENUM('a','b')` | Um valor de uma lista | `ENUM('M','F')` |
 
-> 📌 No Oracle (slides) usa-se `VARCHAR2`. No MySQL é apenas `VARCHAR`.
-> `CHAR(10)` com texto de 5 letras ocupa 10; `VARCHAR(10)` ocupa só 5 (+1 de controle).
-> Se o valor for maior que o limite, o MySQL (modo estrito) retorna **erro**.
+No Oracle (slides) usa-se `VARCHAR2`. No MySQL é apenas `VARCHAR`.
+ `CHAR(10)` com texto de 5 letras ocupa 10; `VARCHAR(10)` ocupa só 5 (+1 de controle).
+Se o valor for maior que o limite, o MySQL (modo estrito) retorna **erro**.
 
-## Numéricos inteiros
+Numéricos inteiros
 | Tipo | Faixa (com sinal) |
 |---|---|
 | `TINYINT` | -128 a 127 |
@@ -22,13 +22,13 @@ Tipos de dados **classificam** as informações de cada coluna. Escolher o tipo 
 | `INT` | ≈ ±2,1 bilhões |
 | `BIGINT` | ≈ ±9,2 quintilhões |
 
-## Numéricos com casas decimais
+ Numéricos com casas decimais
 | Tipo | Uso |
 |---|---|
 | `DECIMAL(p,s)` | **Exato**. Use para **dinheiro**. `DECIMAL(10,2)` = até 10 dígitos, 2 depois da vírgula (equivalente ao `NUMBER(10,2)` do Oracle) |
 | `FLOAT` / `DOUBLE` | Aproximados; podem ter erros de arredondamento. Evite para dinheiro |
 
-## Data e hora
+ Data e hora
 | Tipo | Formato | Exemplo |
 |---|---|---|
 | `DATE` | `YYYY-MM-DD` | `2025-10-21` |
@@ -37,12 +37,12 @@ Tipos de dados **classificam** as informações de cada coluna. Escolher o tipo 
 | `TIMESTAMP` | data + hora (com fuso, atualizável automático) | |
 | `YEAR` | ano | `2025` |
 
-> 📌 O MySQL sempre **armazena** data como `YYYY-MM-DD`. A formatação `DD/MM/YYYY` é feita na consulta com `DATE_FORMAT`.
+O MySQL sempre **armazena** data como `YYYY-MM-DD`. A formatação `DD/MM/YYYY` é feita na consulta com `DATE_FORMAT`.
 
-## Booleano
+ Booleano
 `BOOLEAN` (é um apelido de `TINYINT(1)`): `0` = falso, `1` = verdadeiro. Substitui o `NUMBER(1)` usado na coluna `PRIMEIRA_COMPRA` dos slides.
 
-## Boas práticas
+ Boas práticas
 - CPF, CEP, telefone → **texto** (`VARCHAR`/`CHAR`), não número (zeros à esquerda importam e você não faz conta com eles).
 - Dinheiro → `DECIMAL`.
 - Não use `VARCHAR(255)` em tudo "por garantia".
@@ -50,9 +50,9 @@ Tipos de dados **classificam** as informações de cada coluna. Escolher o tipo 
 
 ---
 
-## 💻 Código completo para testar
 
-### tipos.sql
+
+tipos.sql
 
 ```sql
 USE estudos;
