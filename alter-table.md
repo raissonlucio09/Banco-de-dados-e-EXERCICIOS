@@ -61,7 +61,7 @@ ALTER TABLE cliente ALTER COLUMN status DROP DEFAULT;
 
 ---
 
-## Código completo para testar
+ Código completo para testar
 
 ### alter.sql
 
