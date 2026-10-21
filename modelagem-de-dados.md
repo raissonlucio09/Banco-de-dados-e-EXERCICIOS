@@ -2,14 +2,14 @@
 
 A **modelagem de dados** é a técnica usada para especificar as **regras de negócio** e as **estruturas de dados** de um banco. Faz parte do ciclo de desenvolvimento de um sistema e é vital para o bom resultado do projeto. Consiste em desenhar o sistema de informações, focando nas **entidades** e nas **dependências** entre elas.
 
-## Os 3 níveis
+ Os 3 níveis
 
 ```
 Modelo Conceitual  →  Modelo Lógico  →  Modelo Físico
  (negócio)            (estrutura)        (SGBD real)
 ```
 
-### 1. Modelo Conceitual
+Modelo Conceitual
 - Mais alto nível; usado para **conversar com o cliente**.
 - Foco no **negócio**, não na tecnologia.
 - Diagrama: **DER — Diagrama Entidade-Relacionamento**.
@@ -17,7 +17,7 @@ Modelo Conceitual  →  Modelo Lógico  →  Modelo Físico
 
 Exemplo: `Funcionário (1,n) — é alocado — Projeto (1,n)`, com atributos como `codigo`, `nome`, `data_inicio`.
 
-### 2. Modelo Lógico
+Modelo Lógico
 - Leva em conta algumas limitações e implementa:
   - padrão e nomenclatura;
   - **chaves primárias e estrangeiras**;
@@ -27,12 +27,12 @@ Exemplo: `Funcionário (1,n) — é alocado — Projeto (1,n)`, com atributos co
 
 Exemplo dos slides (locadora): `Cliente — Aluga — Carro`, `Telefone` (1 cliente, N telefones), `Esportivo` e `Sedã` como especializações de `Carro`.
 
-### 3. Modelo Físico
+Modelo Físico
 - Considera as **limitações do SGBD escolhido** (MySQL, Oracle...).
 - É o que vira o script `CREATE TABLE`.
 - Exemplo dos slides: sistema de biblioteca (`livro`, `autor`, `editora`, `exemplar`, `usuario`, `emprestimo`...).
 
-## Cardinalidades
+ Cardinalidades
 | Notação | Significado |
 |---|---|
 | (0,1) | zero ou um |
@@ -40,28 +40,28 @@ Exemplo dos slides (locadora): `Cliente — Aluga — Carro`, `Telefone` (1 clie
 | (0,n) | zero ou muitos |
 | (1,n) | um ou muitos |
 
-## Conceitos do DER
+ Conceitos do DER
 - **Entidade**: "coisa" do mundo real (Cliente, Produto). Vira **tabela**.
 - **Atributo**: característica da entidade (nome, preço). Vira **coluna**.
 - **Relacionamento**: ligação entre entidades. Vira **chave estrangeira** (ou tabela associativa no N:N).
 - **Chave primária**: identifica unicamente cada registro.
 
-## Exemplo: do conceitual ao físico
+ Exemplo: do conceitual ao físico
 
-## Ferramentas
+ Ferramentas
 - **MySQL Workbench** (modelagem + engenharia reversa)
 - brModelo (conceitual/lógico, muito usado no Brasil)
 - dbdiagram.io, draw.io
 
 ---
 
-## 💻 Código completo para testar
 
-### exemplo-locadora.sql
+
+ exemplo-locadora.sql
 
 ```sql
 -- Modelo físico da locadora (Cliente - Aluga - Carro)
-CREATE DATABASE IF NOT EXISTS locadora;
+CREATE DATABASE locadora;
 USE locadora;
 
 CREATE TABLE cliente (
