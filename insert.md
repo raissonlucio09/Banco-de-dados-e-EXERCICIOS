@@ -1,12 +1,12 @@
 # INSERT (inserindo dados)
 
-## Sintaxe
+ Sintaxe
 ```sql
 INSERT INTO nome_tabela (lista_de_campos)
 VALUES (lista_de_dados);
 ```
 
-## Exemplo do slide
+ Exemplo do slide
 ```sql
 INSERT INTO tb_clientes
   (cpf, nome, endereco1, endereco2, bairro, cidade, estado, cep,
@@ -16,14 +16,14 @@ VALUES
    'Morumbi', 'São Paulo', 'SP', '98765243', '1988-05-12', 37, 'M', 5600.35, 3780.60, 0);
 ```
 
-## Regras
+ Regras
 - A **ordem** dos valores deve bater com a ordem das colunas listadas.
 - **Texto e datas** entre aspas simples `'...'`; **números** sem aspas.
 - Data no formato `'AAAA-MM-DD'`.
 - Colunas omitidas recebem `NULL` ou o valor `DEFAULT`.
 - Colunas `AUTO_INCREMENT` podem ser omitidas.
 
-## Variações
+ Variações
 ```sql
 -- Várias linhas de uma vez (mais rápido)
 INSERT INTO produto (nome, preco) VALUES
@@ -46,7 +46,7 @@ INSERT INTO produto (id, nome, preco) VALUES (1, 'Mouse', 64.90)
 ON DUPLICATE KEY UPDATE preco = VALUES(preco);
 ```
 
-## Erros comuns
+ Erros comuns
 | Erro | Causa |
 |---|---|
 | `Column count doesn't match value count` | Número de colunas ≠ número de valores |
@@ -56,9 +56,9 @@ ON DUPLICATE KEY UPDATE preco = VALUES(preco);
 
 ---
 
-## 💻 Código completo para testar
 
-### inserts.sql
+
+ inserts.sql
 
 ```sql
 USE estudos;
