@@ -11,7 +11,7 @@
 | `CHECK` | restringe valores aceitos (MySQL 8.0.16+) |
 | `DEFAULT` | valor padrão quando nada é informado |
 
-## PRIMARY KEY (chave primária)
+PRIMARY KEY (chave primária)
 Valores **únicos e não nulos**. Só pode haver **uma PK por tabela** (mas ela pode ser composta).
 
 ```sql
@@ -30,7 +30,7 @@ CREATE TABLE matriculas (
 );
 ```
 
-## FOREIGN KEY (chave estrangeira)
+ FOREIGN KEY (chave estrangeira)
 Mantém a **integridade referencial**: só aceita valores que **existem** na tabela referenciada.
 
 ```sql
@@ -49,9 +49,9 @@ CREATE TABLE notas (
     FOREIGN KEY (aluno_id, disciplina_id) REFERENCES matriculas(aluno_id, disciplina_id)
 );
 ```
-> Requisitos no MySQL: engine **InnoDB** e colunas com **mesmo tipo**.
 
-## UNIQUE
+
+ UNIQUE
 Valores **não repetidos**, mas **permite NULL** (e vários NULLs).
 
 ```sql
@@ -72,14 +72,14 @@ CREATE TABLE reservas (
 );
 ```
 
-### PRIMARY KEY × UNIQUE
+ PRIMARY KEY × UNIQUE
 | | PRIMARY KEY | UNIQUE |
 |---|---|---|
 | Quantas por tabela | 1 | várias |
 | Aceita NULL | não | sim |
 | Objetivo | identificar o registro | evitar duplicidade em outra coluna |
 
-## NOT NULL
+ NOT NULL
 ```sql
 CREATE TABLE produtos (
     id   INT PRIMARY KEY,
@@ -87,7 +87,7 @@ CREATE TABLE produtos (
 );
 ```
 
-## CHECK
+ CHECK
 Restringe valores aceitos.
 ```sql
 CREATE TABLE funcionarios_chk (
@@ -97,9 +97,9 @@ CREATE TABLE funcionarios_chk (
     CONSTRAINT ck_salario CHECK (salario > 0)
 );
 ```
-> ⚠️ Antes do MySQL 8.0.16 o CHECK era **aceito mas ignorado**. Confira sua versão com `SELECT VERSION();`.
+ Antes do MySQL 8.0.16 o CHECK era **aceito mas ignorado**. Confira sua versão com `SELECT VERSION();`.
 
-## DEFAULT
+ DEFAULT
 Valor padrão se nada for informado.
 ```sql
 CREATE TABLE pedidos_status (
@@ -109,7 +109,7 @@ CREATE TABLE pedidos_status (
 );
 ```
 
-## DEFAULT + CHECK juntos
+ DEFAULT + CHECK juntos
 Exemplo do slide (Oracle usa `VARCHAR2`; no MySQL é `VARCHAR`):
 ```sql
 CREATE TABLE usuarios (
@@ -119,7 +119,7 @@ CREATE TABLE usuarios (
 );
 ```
 
-## Nomeando constraints (boa prática)
+ Nomeando constraints (boa prática)
 Dar nome facilita remover depois.
 ```sql
 CREATE TABLE exemplo (
@@ -140,12 +140,12 @@ WHERE table_schema = 'estudos' AND table_name = 'exemplo';
 
 ---
 
-## 💻 Código completo para testar
+ Código completo
 
 ### constraints.sql
 
 ```sql
-CREATE DATABASE IF NOT EXISTS estudos;
+CREATE DATABASE estudos;
 USE estudos;
 
 CREATE TABLE clientes (
