@@ -2,7 +2,7 @@
 
 O `SELECT` é o comando mais usado do SQL: **consulta** dados de uma ou mais tabelas.
 
-## Estrutura geral (ordem obrigatória)
+ Estrutura geral (ordem obrigatória)
 ```sql
 SELECT   colunas
 FROM     tabela
@@ -13,16 +13,16 @@ ORDER BY colunas
 LIMIT    quantidade;
 ```
 
-## Básico
+Básico
 ```sql
 SELECT * FROM tb_clientes;                    -- tudo
 SELECT nome, cidade FROM tb_clientes;         -- colunas específicas
 SELECT DISTINCT estado FROM tb_clientes;      -- sem repetição
 SELECT nome AS cliente FROM tb_clientes;      -- apelido (alias)
 ```
-> `SELECT *` é ótimo para estudar, mas em sistemas reais liste as colunas.
+ `SELECT *` é ótimo para estudar, mas em sistemas reais liste as colunas.
 
-## WHERE — filtrando linhas
+WHERE — filtrando linhas
 ### Operadores de comparação
 | Operador | Significado |
 |---|---|
@@ -37,7 +37,7 @@ SELECT * FROM tb_clientes WHERE estado <> 'SP';
 SELECT * FROM tb_clientes WHERE nome >= 'Fernando Pires';  -- ordem alfabética
 ```
 
-### LIKE — busca por padrão
+ LIKE — busca por padrão
 - `%` = qualquer quantidade de caracteres
 - `_` = exatamente um caractere
 ```sql
@@ -47,7 +47,7 @@ SELECT * FROM tb_clientes WHERE nome LIKE '%an%';     -- contém "an"
 SELECT * FROM tb_clientes WHERE nome LIKE '_aria';    -- Maria, Karia...
 ```
 
-### Outros filtros úteis
+ Outros filtros úteis
 ```sql
 WHERE idade BETWEEN 20 AND 30             -- inclusive nas pontas
 WHERE estado IN ('SP','RJ','MG')          -- lista
@@ -56,14 +56,14 @@ WHERE endereco2 IS NULL                   -- nulo (NUNCA use = NULL)
 WHERE endereco2 IS NOT NULL
 ```
 
-### Filtros compostos: AND, OR, NOT
+ Filtros compostos: AND, OR, NOT
 ```sql
 SELECT * FROM tb_clientes WHERE volume_compra > 5000 AND volume_compra < 20000;
 SELECT * FROM tb_clientes WHERE idade > 22 AND sexo = 'F';
 SELECT * FROM tb_clientes WHERE sexo = 'F' OR idade > 30;
 SELECT * FROM tb_clientes WHERE (sexo = 'F' OR idade > 30) AND estado = 'SP';
 ```
-> **Precedência**: `AND` é avaliado antes de `OR`. Use parênteses para deixar claro.
+ **Precedência**: `AND` é avaliado antes de `OR`. Use parênteses para deixar claro.
 
 ## ORDER BY — ordenando
 ```sql
@@ -72,13 +72,13 @@ SELECT * FROM tb_clientes ORDER BY nome DESC;   -- decrescente
 SELECT * FROM tb_clientes ORDER BY estado, nome; -- por estado, depois nome
 ```
 
-## LIMIT — limitando resultados
+LIMIT — limitando resultados
 ```sql
 SELECT * FROM tb_clientes ORDER BY limite_credito DESC LIMIT 3;   -- top 3
 SELECT * FROM tb_clientes LIMIT 10 OFFSET 20;                     -- paginação
 ```
 
-## Datas no MySQL (adaptação dos slides Oracle)
+ Datas no MySQL (adaptação dos slides Oracle)
 | Oracle (slide) | MySQL |
 |---|---|
 | `TO_DATE('07/10/1995','DD/MM/YYYY')` | `STR_TO_DATE('07/10/1995','%d/%m/%Y')` |
@@ -96,9 +96,9 @@ Códigos de formato: `%d` dia, `%m` mês, `%Y` ano (4 dígitos), `%y` ano (2), `
 
 ---
 
-## 💻 Código completo para testar
 
-### consultas.sql
+
+consultas.sql
 
 ```sql
 USE estudos;
