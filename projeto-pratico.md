@@ -1,18 +1,18 @@
 # Projeto Prático: Loja Virtual
 
-Junta **tudo** que foi visto: modelagem, constraints, relacionamentos, inserts, joins, agrupamentos, views, índices, transações, triggers.
+Junta **tudo** que foi visto! modelagem, constraints, relacionamentos, inserts, joins, agrupamentos, views, índices, transações, triggers.
 
-## Modelo (DER simplificado)
+Modelo (DER simplificado)
 ```
 categoria (1) ──< produto (N) >── (N) pedido  ── via item_pedido
 cliente   (1) ──< pedido (N)
 cliente   (1) ──< telefone (N)
 ```
 
-## Passo a passo
-Execute na ordem:
+ Passo a passo
 
-## Consultas que você vai praticar
+
+ Consultas que você vai praticar
 - Pedidos com nome do cliente (JOIN)
 - Faturamento por mês e por categoria (GROUP BY)
 - Top 3 clientes que mais compraram
@@ -23,13 +23,13 @@ Execute na ordem:
 
 ---
 
-## 💻 Código completo para testar
 
-### 01-schema.sql
+
+schema.sql
 
 ```sql
-DROP DATABASE IF EXISTS loja;
-CREATE DATABASE loja CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
+
+CREATE DATABASE loja;
 USE loja;
 
 CREATE TABLE categoria (
@@ -86,7 +86,7 @@ CREATE TABLE item_pedido (
 );
 ```
 
-### 02-dados.sql
+dados.sql
 
 ```sql
 USE loja;
@@ -124,7 +124,7 @@ INSERT INTO item_pedido (pedido_id, produto_id, quantidade, preco_unitario) VALU
  (5,3,2,799.00),(5,1,1,89.90);
 ```
 
-### 03-consultas.sql
+consultas.sql
 
 ```sql
 USE loja;
@@ -191,7 +191,7 @@ FROM cliente c LEFT JOIN telefone t ON t.cliente_id = c.id
 GROUP BY c.id, c.nome;
 ```
 
-### 04-extras.sql
+extras.sql
 
 ```sql
 USE loja;
