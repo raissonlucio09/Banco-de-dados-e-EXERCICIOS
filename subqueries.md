@@ -2,7 +2,7 @@
 
 Uma **consulta dentro de outra**, entre parênteses.
 
-## No WHERE
+ No WHERE
 ```sql
 -- Clientes com limite acima da média
 SELECT nome, limite_credito
@@ -10,7 +10,7 @@ FROM tb_clientes
 WHERE limite_credito > (SELECT AVG(limite_credito) FROM tb_clientes);
 ```
 
-## Com IN / NOT IN
+ Com IN / NOT IN
 ```sql
 -- Clientes que fizeram pedidos
 SELECT nome FROM cliente
@@ -20,15 +20,15 @@ WHERE id IN (SELECT cliente_id FROM pedido);
 SELECT nome FROM cliente
 WHERE id NOT IN (SELECT cliente_id FROM pedido WHERE cliente_id IS NOT NULL);
 ```
-> `NOT IN` com NULL na subquery retorna **vazio**! Filtre os NULLs ou use `NOT EXISTS`.
+ `NOT IN` com NULL na subquery retorna **vazio**! Filtre os NULLs ou use `NOT EXISTS`.
 
-## Com EXISTS
+ Com EXISTS
 ```sql
 SELECT c.nome FROM cliente c
 WHERE EXISTS (SELECT 1 FROM pedido p WHERE p.cliente_id = c.id);
 ```
 
-## No FROM (tabela derivada — precisa de alias)
+ No FROM (tabela derivada — precisa de alias)
 ```sql
 SELECT estado, media
 FROM (SELECT estado, AVG(limite_credito) AS media
@@ -36,19 +36,19 @@ FROM (SELECT estado, AVG(limite_credito) AS media
 WHERE media > 4000;
 ```
 
-## No SELECT (subconsulta escalar)
+ No SELECT (subconsulta escalar)
 ```sql
 SELECT nome,
        (SELECT COUNT(*) FROM pedido p WHERE p.cliente_id = c.id) AS qtd_pedidos
 FROM cliente c;
 ```
 
-## ANY / ALL
+ANY / ALL
 ```sql
 SELECT * FROM produto WHERE preco > ALL (SELECT preco FROM produto WHERE nome LIKE 'Cabo%');
 ```
 
-## CTE (WITH) — MySQL 8+
+ CTE (WITH) — MySQL 8+
 Deixa consultas complexas mais legíveis.
 ```sql
 WITH total_por_cliente AS (
@@ -60,7 +60,7 @@ FROM cliente c JOIN total_por_cliente t ON t.cliente_id = c.id
 WHERE t.total > 200;
 ```
 
-## UNION
+UNION
 Junta resultados de dois SELECTs (mesmo nº de colunas).
 ```sql
 SELECT nome FROM cliente UNION SELECT nome FROM funcionario;      -- sem repetidos
@@ -69,9 +69,9 @@ SELECT nome FROM cliente UNION ALL SELECT nome FROM funcionario;  -- com repetid
 
 ---
 
-## 💻 Código completo para testar
 
-### subqueries.sql
+
+ subqueries.sql
 
 ```sql
 USE loja_joins;
