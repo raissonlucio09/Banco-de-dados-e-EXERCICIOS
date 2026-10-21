@@ -1,5 +1,4 @@
 # CREATE DATABASE e CREATE TABLE (DDL)
-
 ## Criando e usando um banco
 ```sql
 CREATE DATABASE loja;          -- cria
@@ -8,7 +7,7 @@ USE loja;                      -- seleciona para usar
 DROP DATABASE loja;            -- apaga (cuidado!)
 ```
 
-## Criando uma tabela
+ Criando uma tabela
 ```sql
 CREATE TABLE nome_tabela (
     coluna1 TIPO [restrições],
@@ -38,9 +37,9 @@ CREATE TABLE tb_clientes (
     primeira_compra TINYINT(1)
 );
 ```
-> No slide original: `FLOAT` para valores e `NUMBER(1)` para primeira compra (Oracle). Aqui usamos `DECIMAL` e `TINYINT(1)`.
+No slide `FLOAT` para valores e `NUMBER(1)` para primeira compra (Oracle).
 
-## Comandos úteis
+ Comandos úteis
 | Comando | O que faz |
 |---|---|
 | `SHOW TABLES;` | lista as tabelas |
@@ -51,7 +50,7 @@ CREATE TABLE tb_clientes (
 | `CREATE TABLE copia LIKE original;` | copia a estrutura |
 | `CREATE TABLE copia AS SELECT * FROM original;` | copia estrutura + dados |
 
-## AUTO_INCREMENT
+ AUTO_INCREMENT
 Gera automaticamente o número sequencial (típico para chave primária).
 ```sql
 CREATE TABLE produto (
@@ -60,22 +59,21 @@ CREATE TABLE produto (
 );
 ```
 
-## Boas práticas de nomenclatura
+ Boas práticas de nomenclatura
 - Nomes em `snake_case`, sem acento e sem espaço.
 - Tabelas no singular (`cliente`) ou prefixo (`tb_clientes`) — escolha um padrão e mantenha.
 - Chave estrangeira: `<tabela>_id` (ex.: `cliente_id`).
 
 ---
 
-## 💻 Código completo para testar
+
 
 ### criar-tabelas.sql
 
 ```sql
-CREATE DATABASE IF NOT EXISTS estudos CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
+CREATE DATABASE estudos;
 USE estudos;
 
-DROP TABLE IF EXISTS tb_clientes;
 
 CREATE TABLE tb_clientes (
     cpf             VARCHAR(11),
@@ -90,10 +88,8 @@ CREATE TABLE tb_clientes (
     idade           INT,
     sexo            VARCHAR(1),
     limite_credito  DECIMAL(10,2),
-    volume_compra   DECIMAL(10,2),
-    primeira_compra TINYINT(1)
+    volume_compra   DECIMAL(10,2)
 );
 
 DESCRIBE tb_clientes;
-SHOW CREATE TABLE tb_clientes;
 ```
